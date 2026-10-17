@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DriveX - Premium Autonoleggio Auto e Moto</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#0284c7',
+              600: '#0284c7',
+              700: '#0369a1',
+            },
+            accent: {
+              500: '#f97316',
+              600: '#ea580c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-nav {
+      background: rgba(9, 13, 22, 0.88);
+      backdrop-filter: blur(20px);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-gradient-to-r from-brand-700 via-brand-600 to-accent-600 text-white text-[11px] sm:text-xs font-medium py-1.5 px-4 text-center flex items-center justify-center gap-2">
+    <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Offerta Speciale</span>
+    <span>Sconto del 15% su noleggi settimanali con cancellazione gratuita entro 24 ore!</span>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
+            <i data-lucide="car" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="font-heading font-extrabold text-2xl tracking-tight text-white block leading-none">
+              Drive<span class="text-accent-500">X</span>
+            </span>
+            <span class="text-[10px] text-slate-400 tracking-wider font-semibold uppercase">Premium Rent Auto & Moto</span>
+          </div>
+        </a>
+
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-300">
+          <a href="#flotta" class="hover:text-brand-500 transition-colors">Flotta Veicoli</a>
+          <a href="#calcolatore" class="hover:text-brand-500 transition-colors">Preventivo Rapido</a>
+          <a href="#vantaggi" class="hover:text-brand-500 transition-colors">Perché Sceglierci</a>
+          <a href="#recensioni" class="hover:text-brand-500 transition-colors">Recensioni</a>
+          <a href="#faq" class="hover:text-brand-500 transition-colors">FAQ & Sedi</a>
+        </nav>
+
+        <!-- Action Call Buttons -->
+        <div class="flex items-center gap-3">
+          <a href="tel:+390612345678" class="hidden xl:flex items-center gap-2 text-xs text-slate-400 hover:text-white mr-2">
+            <i data-lucide="phone-call" class="w-4 h-4 text-brand-500"></i>
+            <span>+39 06 1234 5678</span>
+          </a>
+          <button onclick="scrollToFleet()" class="flex items-center gap-2 bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-500 hover:to-brand-600 text-white font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-xl shadow-lg shadow-brand-600/25 transition-all hover:scale-[1.02]">
+            <i data-lucide="key" class="w-4 h-4"></i>
+            <span>Sfoglia Flotta</span>
+          </button>
+          
+          <!-- Mobile Menu Toggle Button -->
+          <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-400 hover:text-white rounded-lg">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/95 px-4 pt-3 pb-6 space-y-3">
+      <a href="#flotta" onclick="closeMobileMenu()" class="block py-2 text-slate-200 font-medium">Flotta Veicoli</a>
+      <a href="#calcolatore" onclick="closeMobileMenu()" class="block py-2 text-slate-200 font-medium">Preventivo Rapido</a>
+      <a href="#vantaggi" onclick="closeMobileMenu()" class="block py-2 text-slate-200 font-medium">Perché Sceglierci</a>
+      <a href="#recensioni" onclick="closeMobileMenu()" class="block py-2 text-slate-200 font-medium">Recensioni</a>
+      <a href="#faq" onclick="closeMobileMenu()" class="block py-2 text-slate-200 font-medium">FAQ & Sedi</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION WITH QUICK BOOKING SEARCH BAR -->
+  <section class="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <!-- Dynamic Glow Effects -->
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-600/20 via-transparent to-transparent pointer-events-none"></div>
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs sm:text-sm font-semibold mb-6">
+          <i data-lucide="shield-check" class="w-4 h-4 text-brand-500"></i> Noleggio Sicuro senza Sorprese
+        </div>
+        <h1 class="font-heading text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.12] mb-6">
+          Esplora Senza Limiti in <br/>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 via-sky-400 to-accent-500">Auto, Moto o Scooter</span>
+        </h1>
+        <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
+          Scegli la comodità delle nostre auto di ultima generazione o l'agilità delle nostre moto e scooter. Ritiro immediato in Aeroporto, Stazione e Centro Città.
+        </p>
+      </div>
+
+      <!-- SEARCH BAR WIDGET -->
+      <div class="glass-card rounded-3xl p-5 sm:p-8 shadow-2xl border border-slate-700/60 max-w-5xl mx-auto">
+        <form id="heroSearchForm" onsubmit="event.preventDefault(); applyHeroSearch();" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          
+          <!-- Ritiro / Consegna -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-500"></i> Luogo Ritiro
+            </label>
+            <select id="searchLocation" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="aeroporto">Roma / Milano Aeroporto</option>
+              <option value="stazione">Stazione Centrale</option>
+              <option value="centro">Centro Città Office</option>
+              <option value="hotel">Consegna in Hotel</option>
+            </select>
+          </div>
+
+          <!-- Tipologia Veicolo -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <i data-lucide="filter" class="w-3.5 h-3.5 text-brand-500"></i> Categoria
+            </label>
+            <select id="searchCategory" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="all">Tutti i Veicoli</option>
+              <option value="auto">Tutte le Auto</option>
+              <option value="moto">Tutte le Moto & Scooter</option>
+            </select>
+          </div>
+
+          <!-- Date Ritiro -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-500"></i> Data Ritiro
+            </label>
+            <input type="date" id="searchPickDate" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
+          </div>
+
+          <!-- Date Riconsegna -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <i data-lucide="calendar-check" class="w-3.5 h-3.5 text-brand-500"></i> Data Riconsegna
+            </label>
+            <input type="date" id="searchReturnDate" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
+          </div>
+
+          <!-- Submit Button -->
+          <div class="flex items-end sm:col-span-2 lg:col-span-1">
+            <button type="submit" class="w-full h-[42px] bg-accent-500 hover:bg-accent-600 text-white font-semibold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-accent-500/25 transition-all hover:scale-[1.02]">
+              <i data-lucide="search" class="w-4 h-4"></i> Cerca Ora
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHT STATS BAR -->
+  <section class="border-y border-slate-800 bg-slate-900/40 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <p class="font-heading text-3xl font-extrabold text-white">150+</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Veicoli In Flotta</p>
+        </div>
+        <div>
+          <p class="font-heading text-3xl font-extrabold text-brand-500">0 €</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Costi Nascosti</p>
+        </div>
+        <div>
+          <p class="font-heading text-3xl font-extrabold text-accent-500">24/7</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Soccorso Stradale</p>
+        </div>
+        <div>
+          <p class="font-heading text-3xl font-extrabold text-emerald-400">4.9 / 5</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Oltre 2,500 Recensioni</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG / FLEET SECTION -->
+  <section id="flotta" class="py-20 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Title -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-accent-500 font-semibold text-xs uppercase tracking-widest block mb-2">Flotta Aggiornata 2026</span>
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Scegli il Veicolo Ideale</h2>
+        </div>
+        <p class="text-slate-400 text-sm max-w-md">
+          Citycar economiche, SUV spaziosi, modelli di lusso o scooter agili e moto touring pronti per il tuo prossimo viaggio.
+        </p>
+      </div>
+
+      <!-- Filters & Sorting Bar -->
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-8 bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-800">
+        
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap items-center gap-1.5 overflow-x-auto pb-2 lg:pb-0">
+          <button onclick="setFilter('all')" id="tab-all" class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-brand-600 text-white">
+            Tutti
+          </button>
+          <button onclick="setFilter('utilitaria')" id="tab-utilitaria" class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">
+            Utilitarie
+          </button>
+          <button onclick="setFilter('suv')" id="tab-suv" class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">
+            SUV
+          </button>
+          <button onclick="setFilter('lusso')" id="tab-lusso" class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">
+            Lusso & Cabrio
+          </button>
+          <button onclick="setFilter('scooter')" id="tab-scooter" class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">
+            Scooter
+          </button>
+          <button onclick="setFilter('moto')" id="tab-moto" class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">
+            Moto Touring & Sport
+          </button>
+        </div>
+
+        <!-- Search & Sort Controls -->
+        <div class="flex items-center gap-3">
+          <div class="relative flex-1 sm:w-48">
+            <input type="text" id="fleetSearchInput" oninput="renderFleet()" placeholder="Cerca veicolo..." class="w-full bg-slate-950 border border-slate-700 text-white text-xs sm:text-sm rounded-xl pl-8 pr-3 py-2 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-3"></i>
+          </div>
+          
+          <select id="sortSelect" onchange="renderFleet()" class="bg-slate-950 border border-slate-700 text-white text-xs sm:text-sm rounded-xl px-3 py-2 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <option value="popular">Più Richiesti</option>
+            <option value="price-asc">Prezzo: Basso - Alto</option>
+            <option value="price-desc">Prezzo: Alto - Basso</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Fleet Grid Container -->
+      <div id="fleetGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Injected dynamically via JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUICK COST CALCULATOR WIDGET -->
+  <section id="calcolatore" class="py-20 bg-slate-900 border-y border-slate-800 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-5">
+          <span class="text-brand-500 font-semibold text-xs uppercase tracking-widest block mb-2">Simulatore Trasparente</span>
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            Calcola la TUA Tariffa al Volo
+          </h2>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Pianifica la spesa prima ancora di prenotare. Più estendi la durata del noleggio, più basso sarà il costo giornaliero!
+          </p>
+          <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span>Sconto 10% per noleggi da 3 a 6 giorni</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span>Sconto 20% per noleggi di 7 o più giorni</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span>Cancellazione gratuita e chilometraggio illimitato</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <div class="glass-card p-6 sm:p-8 rounded-3xl border border-slate-700 shadow-xl">
+            <h3 class="font-heading text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <i data-lucide="calculator" class="w-5 h-5 text-accent-500"></i> Calcolatore Rapido
+            </h3>
+
+            <div class="space-y-6">
+              <!-- Category Selector -->
+              <div>
+                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Seleziona Tipologia</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <button type="button" onclick="calcSetCategory('utilitaria', 35)" class="calc-cat-btn border border-brand-500 bg-brand-500/10 text-white rounded-xl p-3 text-xs font-semibold text-center transition-all">Utilitaria<br/><span class="text-slate-400 font-normal">da €35/g</span></button>
+                  <button type="button" onclick="calcSetCategory('suv', 65)" class="calc-cat-btn border border-slate-700 bg-slate-900 text-slate-300 rounded-xl p-3 text-xs font-semibold text-center transition-all">SUV<br/><span class="text-slate-400 font-normal">da €65/g</span></button>
+                  <button type="button" onclick="calcSetCategory('scooter', 28)" class="calc-cat-btn border border-slate-700 bg-slate-900 text-slate-300 rounded-xl p-3 text-xs font-semibold text-center transition-all">Scooter<br/><span class="text-slate-400 font-normal">da €28/g</span></button>
+                  <button type="button" onclick="calcSetCategory('moto', 80)" class="calc-cat-btn border border-slate-700 bg-slate-900 text-slate-300 rounded-xl p-3 text-xs font-semibold text-center transition-all">Moto Touring<br/><span class="text-slate-400 font-normal">da €80/g</span></button>
+                </div>
+              </div>
+
+              <!-- Days Range Slider -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Durata Noleggio</label>
+                  <span id="calcDaysDisplay" class="font-heading font-bold text-brand-500 text-base">3 Giorni</span>
+                </div>
+                <input type="range" id="calcDaysRange" min="1" max="30" value="3" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-500">
+              </div>
+
+              <!-- Extra Options Checkboxes -->
+              <div>
+                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Extra Opzionali</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer text-xs text-slate-300">
+                    <input type="checkbox" id="calcKasko" onchange="updateCalculator()" class="rounded border-slate-700 text-brand-600 focus:ring-brand-500 bg-slate-900">
+                    <span>Protezione KASKO Zero Franchigia (+€15/g)</span>
+                  </label>
+                  <label class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer text-xs text-slate-300">
+                    <input type="checkbox" id="calcGps" onchange="updateCalculator()" class="rounded border-slate-700 text-brand-600 focus:ring-brand-500 bg-slate-900">
+                    <span>Navigatore GPS Satellitare (+€5/g)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Final Output -->
+              <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                <div>
+                  <span class="text-xs text-slate-400 block">Stima Totale (IVA Inclusa)</span>
+                  <span id="calcTotalDisplay" class="font-heading text-3xl font-extrabold text-white">€105.00</span>
+                </div>
+                <button onclick="scrollToFleet()" class="bg-accent-500 hover:bg-accent-600 text-white font-semibold text-xs sm:text-sm px-5 py-3 rounded-xl transition-all shadow-lg shadow-accent-500/20">
+                  Prenota Veicolo
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US / ADVANTAGES -->
+  <section id="vantaggi" class="py-20 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-brand-500 font-semibold text-xs uppercase tracking-widest block mb-2">Garanzia DriveX</span>
+        <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Perché Scegliere Noi</h2>
+        <p class="text-slate-400 text-sm mt-3">Ci impegniamo a rendere ogni viaggio fluido, trasparente e senza alcun imprevisto.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center mb-5">
+            <i data-lucide="gauge" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Chilometri Illimitati</h3>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Nessun contachilometri da controllare. Viaggia in totale libertà su tutto il territorio nazionale ed europeo.
+          </p>
+        </div>
+
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-accent-500/10 text-accent-500 flex items-center justify-center mb-5">
+            <i data-lucide="credit-card" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Senza Carte di Credito Obbligatorie</h3>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Accettiamo anche carte di debito, Postepay o contanti previa opzione protezione completa KASKO.
+          </p>
+        </div>
+
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-5">
+            <i data-lucide="life-buoy" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Assistenza H24 & Soccorso</h3>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Assistenza stradale h24/7 con veicolo sostitutivo immediato in caso di guasto o imprevisto.
+          </p>
+        </div>
+
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center mb-5">
+            <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Cancellazione Gratuita</h3>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Piani modificati? Cancella gratuitamente la prenotazione fino a 24 ore prima dell'orario di ritiro.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section id="recensioni" class="py-20 bg-slate-900 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-accent-500 font-semibold text-xs uppercase tracking-widest block mb-2">Opinioni Verificate</span>
+        <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Cosa Dicono i Nostri Clienti</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+          <div class="flex items-center gap-1 text-amber-400 mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-slate-300 text-xs italic leading-relaxed mb-6">
+            "Servizio impeccabile. Ho noleggiato uno scooter Honda SH per muovermi facilmente durante il mio viaggio di lavoro. Consegna puntualissima e mezzo immacolato."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-brand-600 flex items-center justify-center font-bold text-white text-xs">
+              M.L.
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white">Marco Rossi</p>
+              <p class="text-[11px] text-slate-400">Noleggiato Scooter 150cc</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+          <div class="flex items-center gap-1 text-amber-400 mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-slate-300 text-xs italic leading-relaxed mb-6">
+            "Abbiamo prenotato una BMW X3 per un viaggio di una settimana. Prezzo imbattibile e nessuna sorpresa al momento della riconsegna. Personale gentilissimo!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-accent-500 flex items-center justify-center font-bold text-white text-xs">
+              S.B.
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white">Stefania Bianchi</p>
+              <p class="text-[11px] text-slate-400">Noleggiato SUV BMW X3</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+          <div class="flex items-center gap-1 text-amber-400 mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-slate-300 text-xs italic leading-relaxed mb-6">
+            "Ho preso una Ducati Multistrada V4 per un tour del fine settimana. Moto accessoriata benissimo con bauletti originali e supporto per cellulare. Esperienza da 10 e lode!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center font-bold text-white text-xs">
+              A.G.
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white">Andrea Galli</p>
+              <p class="text-[11px] text-slate-400">Noleggiato Ducati Touring</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ & CONTACT SECTION -->
+  <section id="faq" class="py-20 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- FAQ Accordion -->
+        <div class="lg:col-span-7">
+          <span class="text-brand-500 font-semibold text-xs uppercase tracking-widest block mb-2">Risposte Chiare</span>
+          <h2 class="font-heading text-3xl font-extrabold text-white mb-6">Domande Frequenti (FAQ)</h2>
+          
+          <div class="space-y-3" id="faqAccordion">
+            
+            <div class="border border-slate-800 rounded-2xl bg-slate-900 overflow-hidden">
+              <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left font-semibold text-white text-sm flex items-center justify-between hover:text-brand-500 transition-colors">
+                <span>Quali requisiti servono per noleggiare un'auto o una moto?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transform transition-transform"></i>
+              </button>
+              <div class="hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800/50 pt-3">
+                È richiesta una patente di guida valida (B per auto e scooter fino a 125cc; A2/A per moto di cilindrata superiore), un documento d'identità in corso di validità ed avere compiuto almeno 19 anni per le utilitarie e 25 anni per le moto/SUV.
+              </div>
+            </div>
+
+            <div class="border border-slate-800 rounded-2xl bg-slate-900 overflow-hidden">
+              <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left font-semibold text-white text-sm flex items-center justify-between hover:text-brand-500 transition-colors">
+                <span>Come funziona la cauzione e il deposito di garanzia?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transform transition-transform"></i>
+              </button>
+              <div class="hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800/50 pt-3">
+                Il deposito viene pre-autorizzato sulla carta al momento del ritiro. Se scegli la copertura "Protezione KASKO Zero Franchigia", il deposito cauzionale si riduce a soli €150.
+              </div>
+            </div>
+
+            <div class="border border-slate-800 rounded-2xl bg-slate-900 overflow-hidden">
+              <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left font-semibold text-white text-sm flex items-center justify-between hover:text-brand-500 transition-colors">
+                <span>Posso consegnare il veicolo in una sede diversa?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transform transition-transform"></i>
+              </button>
+              <div class="hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800/50 pt-3">
+                Sì, offriamo il servizio "One-Way" tra tutte le nostre sedi principali (es. ritiro in Aeroporto Roma Fiumicino e riconsegna in Stazione Milano Centrale) con un piccolo supplemento.
+              </div>
+            </div>
+
+            <div class="border border-slate-800 rounded-2xl bg-slate-900 overflow-hidden">
+              <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left font-semibold text-white text-sm flex items-center justify-between hover:text-brand-500 transition-colors">
+                <span>I caschi sono inclusi per il noleggio moto/scooter?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transform transition-transform"></i>
+              </button>
+              <div class="hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800/50 pt-3">
+                Sì! Il primo casco omologato per il conducente è sempre incluso nel prezzo di noleggio di qualsiasi moto o scooter. È possibile richiedere il secondo casco per il passeggero tra gli extra opzionali.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Contact & Locations Card -->
+        <div class="lg:col-span-5 flex flex-col justify-between bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800">
+          <div>
+            <span class="text-accent-500 font-semibold text-xs uppercase tracking-widest block mb-2">Assistenza e Sedi</span>
+            <h3 class="font-heading text-2xl font-bold text-white mb-6">Contatti Diretti</h3>
+            
+            <div class="space-y-4 mb-8">
+              <div class="flex items-start gap-3">
+                <div class="p-2.5 rounded-xl bg-brand-500/10 text-brand-500 mt-1">
+                  <i data-lucide="map-pin" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-white">Sede Principale & Terminal</p>
+                  <p class="text-xs text-slate-400">Via dell'Aviazione 45, Terminal 1 - Fiumicino (Roma)</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="p-2.5 rounded-xl bg-brand-500/10 text-brand-500 mt-1">
+                  <i data-lucide="phone" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-white">Telefono & WhatsApp H24</p>
+                  <p class="text-xs text-slate-400">+39 06 1234 5678 / +39 340 998 8776</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="p-2.5 rounded-xl bg-brand-500/10 text-brand-500 mt-1">
+                  <i data-lucide="mail" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-white">Email Servizio Clienti</p>
+                  <p class="text-xs text-slate-400">supporto@drivex-noleggio.it</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Simulated Map Widget -->
+          <div class="w-full h-36 bg-slate-950 rounded-2xl border border-slate-800 relative overflow-hidden flex items-center justify-center p-4">
+            <div class="text-center z-10">
+              <i data-lucide="compass" class="w-7 h-7 text-brand-500 mx-auto mb-1 animate-pulse"></i>
+              <p class="text-xs font-bold text-white">3 Sedi Attive sul Territorio</p>
+              <p class="text-[11px] text-slate-400">Aeroporti • Stazioni • Centri Storici</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-10 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
+            <i data-lucide="car" class="w-4 h-4"></i>
+          </div>
+          <span class="font-heading font-bold text-lg text-white">DriveX</span>
+          <span class="text-slate-600">|</span>
+          <span>© 2026 DriveX Autonoleggio S.r.l. - Tutti i diritti riservati.</span>
+        </div>
+
+        <div class="flex items-center gap-6 text-slate-400">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Termini di Servizio</a>
+          <a href="#" class="hover:text-white transition-colors">Condizioni di Noleggio</a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOOKING WIZARD MODAL -->
+  <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative my-8">
+      
+      <!-- Close Button -->
+      <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-full bg-slate-800/60 z-10">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="p-6 border-b border-slate-800 bg-slate-950/60">
+        <span class="text-brand-500 font-semibold text-xs uppercase tracking-wider block mb-1">Wizard Prenotazione</span>
+        <h3 id="modalTitle" class="font-heading text-xl font-bold text-white">Configura la tua Prenotazione</h3>
+        
+        <!-- Step Progress Bar -->
+        <div class="flex items-center gap-2 mt-4">
+          <div id="stepDot1" class="h-1.5 flex-1 rounded-full bg-brand-500"></div>
+          <div id="stepDot2" class="h-1.5 flex-1 rounded-full bg-slate-800"></div>
+          <div id="stepDot3" class="h-1.5 flex-1 rounded-full bg-slate-800"></div>
+          <div id="stepDot4" class="h-1.5 flex-1 rounded-full bg-slate-800"></div>
+        </div>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="p-6">
+        
+        <!-- STEP 1: Vehicle & Dates Summary -->
+        <div id="modalStep1" class="step-content">
+          <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-950 border border-slate-800 mb-6">
+            <div id="modalVehicleImage" class="w-20 h-20 rounded-xl overflow-hidden bg-slate-900 shrink-0">
+              <img id="modalVehicleImgSrc" src="" alt="Veicolo" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <span id="modalVehicleBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 uppercase">Auto</span>
+              <h4 id="modalVehicleName" class="font-heading text-lg font-bold text-white">Fiat 500 Hybrid</h4>
+              <p id="modalVehiclePrice" class="text-xs text-slate-400">€35.00 / giorno</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs font-semibold text-slate-400 block mb-1.5">Data & Ora Ritiro</label>
+              <input type="datetime-local" id="wizardPickDate" onchange="calculateWizardTotal()" class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-slate-400 block mb-1.5">Data & Ora Riconsegna</label>
+              <input type="datetime-local" id="wizardReturnDate" onchange="calculateWizardTotal()" class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Optional Extra Add-ons -->
+        <div id="modalStep2" class="step-content hidden">
+          <h4 class="font-semibold text-white text-sm mb-3">Scegli Servizi Extra Opzionali</h4>
+          <div class="space-y-3">
+            
+            <label class="flex items-center justify-between p-3.5 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="extraKasko" onchange="calculateWizardTotal()" class="rounded border-slate-700 text-brand-500 bg-slate-900">
+                <div>
+                  <p class="text-xs font-semibold text-white">Protezione KASKO Zero Franchigia</p>
+                  <p class="text-[11px] text-slate-400">Nessuna responsabilità per danni o furto</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-brand-400">+€15/g</span>
+            </label>
+
+            <label class="flex items-center justify-between p-3.5 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="extraGps" onchange="calculateWizardTotal()" class="rounded border-slate-700 text-brand-500 bg-slate-900">
+                <div>
+                  <p class="text-xs font-semibold text-white">Navigatore GPS Satellitare</p>
+                  <p class="text-[11px] text-slate-400">Mappe offline aggiornate</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-brand-400">+€5/g</span>
+            </label>
+
+            <label class="flex items-center justify-between p-3.5 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="extraDriver" onchange="calculateWizardTotal()" class="rounded border-slate-700 text-brand-500 bg-slate-900">
+                <div>
+                  <p class="text-xs font-semibold text-white">Secondo Guidatore Autorizzato</p>
+                  <p class="text-[11px] text-slate-400">Pensa alla guida alternata per lunghi viaggi</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-brand-400">+€8/g</span>
+            </label>
+
+            <label id="extraSeatContainer" class="flex items-center justify-between p-3.5 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="extraSeat" onchange="calculateWizardTotal()" class="rounded border-slate-700 text-brand-500 bg-slate-900">
+                <div>
+                  <p class="text-xs font-semibold text-white">Seggiolino Bimba/Bimbo Isofix</p>
+                  <p class="text-[11px] text-slate-400">Omologato per la sicurezza dei più piccoli</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-brand-400">+€7/g</span>
+            </label>
+
+            <label id="extraHelmetContainer" class="flex items-center justify-between p-3.5 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="extraHelmet" onchange="calculateWizardTotal()" class="rounded border-slate-700 text-brand-500 bg-slate-900">
+                <div>
+                  <p class="text-xs font-semibold text-white">Casco Supplementare Passeggero (Moto)</p>
+                  <p class="text-[11px] text-slate-400">Omologato ECE 22.06 con igienizzazione</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-brand-400">+€6/g</span>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- STEP 3: Driver Information Form -->
+        <div id="modalStep3" class="step-content hidden">
+          <h4 class="font-semibold text-white text-sm mb-3">Dati Anagrafici del Conducente</h4>
+          <form id="driverForm" class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Nome *</label>
+                <input type="text" id="driverFirstName" placeholder="Mario" required class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-brand-500">
+              </div>
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Cognome *</label>
+                <input type="text" id="driverLastName" placeholder="Rossi" required class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-brand-500">
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Email *</label>
+                <input type="email" id="driverEmail" placeholder="mario.rossi@email.it" required class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-brand-500">
+              </div>
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Telefono / WhatsApp *</label>
+                <input type="tel" id="driverPhone" placeholder="+39 333 1234567" required class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-brand-500">
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Numero Patente *</label>
+                <input type="text" id="driverLicense" placeholder="U12345678X" required class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-brand-500">
+              </div>
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Età Conducente *</label>
+                <input type="number" id="driverAge" min="19" max="85" value="28" required class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-brand-500">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- STEP 4: Final Summary & Confirmation -->
+        <div id="modalStep4" class="step-content hidden">
+          <div class="text-center py-2 mb-4">
+            <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-2">
+              <i data-lucide="check-circle" class="w-6 h-6"></i>
+            </div>
+            <h4 class="font-heading text-lg font-bold text-white">Riepilogo della Prenotazione</h4>
+            <p class="text-xs text-slate-400">Verifica i dati inseriti prima di inoltrare la richiesta.</p>
+          </div>
+
+          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2.5 text-xs text-slate-300">
+            <div class="flex justify-between border-b border-slate-800/80 pb-2">
+              <span class="text-slate-400">Veicolo Selezionato:</span>
+              <span id="sumVehicle" class="font-bold text-white">-</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800/80 pb-2">
+              <span class="text-slate-400">Durata Noleggio:</span>
+              <span id="sumDays" class="font-bold text-white">-</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800/80 pb-2">
+              <span class="text-slate-400">Intestatario:</span>
+              <span id="sumDriver" class="font-bold text-white">-</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800/80 pb-2">
+              <span class="text-slate-400">Codice Riferimento:</span>
+              <span id="sumRefCode" class="font-mono font-bold text-accent-500">DRV-2026-X89</span>
+            </div>
+            <div class="flex justify-between pt-1">
+              <span class="font-bold text-white text-sm">Prezzo Totale Stimato:</span>
+              <span id="sumTotal" class="font-bold text-emerald-400 text-base">€0.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer controls -->
+      <div class="p-6 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between">
+        <button id="modalPrevBtn" onclick="wizardPrevStep()" class="hidden text-xs font-semibold text-slate-400 hover:text-white px-4 py-2.5 rounded-xl border border-slate-800">
+          Indietro
+        </button>
+        <div class="ml-auto flex items-center gap-3">
+          <span id="modalLiveTotal" class="font-heading text-lg font-bold text-white mr-2">€35.00</span>
+          <button id="modalNextBtn" onclick="wizardNextStep()" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs px-6 py-3 rounded-xl transition-all shadow-lg shadow-brand-600/20">
+            Continua
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // FULL VEHICLE DATA
+    const fleetData = [
+      {
+        id: 1,
+        name: "Fiat 500 Hybrid",
+        category: "auto",
+        subCat: "utilitaria",
+        subCatName: "Utilitaria",
+        price: 35,
+        popularity: 98,
+        status: "Ibrida Popolare",
+        specs: { transmission: "Manuale", seats: "4 Posti", fuel: "Ibrida / Benzina", power: "70 CV" },
+        img: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 2,
+        name: "BMW X3 xDrive",
+        category: "auto",
+        subCat: "suv",
+        subCatName: "SUV Premium",
+        price: 85,
+        popularity: 95,
+        status: "Promozione",
+        specs: { transmission: "Automatico", seats: "5 Posti", fuel: "Diesel Mild-Hybrid", power: "190 CV" },
+        img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 3,
+        name: "Vespa GTS 125 Super",
+        category: "moto",
+        subCat: "scooter",
+        subCatName: "Scooter 125cc",
+        price: 28,
+        popularity: 99,
+        status: "Agile in Città",
+        specs: { transmission: "Automatico", seats: "2 Posti", fuel: "Benzina", power: "14 CV" },
+        img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 4,
+        name: "Ducati Multistrada V4",
+        category: "moto",
+        subCat: "moto",
+        subCatName: "Touring / Enduro",
+        price: 90,
+        popularity: 92,
+        status: "Top Performance",
+        specs: { transmission: "Sequenziale", seats: "2 Posti", fuel: "Benzina", power: "170 CV" },
+        img: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 5,
+        name: "Porsche 718 Boxster Cabrio",
+        category: "auto",
+        subCat: "lusso",
+        subCatName: "Lusso / Cabrio",
+        price: 180,
+        popularity: 88,
+        status: "Esclusivo",
+        specs: { transmission: "Automatico PDK", seats: "2 Posti", fuel: "Benzina", power: "300 CV" },
+        img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 6,
+        name: "Honda SH 150i",
+        category: "moto",
+        subCat: "scooter",
+        subCatName: "Scooter 150cc",
+        price: 30,
+        popularity: 94,
+        status: "Bauletto Incluso",
+        specs: { transmission: "Automatico", seats: "2 Posti", fuel: "Benzina", power: "16 CV" },
+        img: "https://images.unsplash.com/photo-1525160354320-d8e92641c563?auto=format&fit=crop&w=600&q=80"
+      }
+    ];
+
+    let activeFilter = 'all';
+    let selectedVehicle = null;
+    let currentStep = 1;
+
+    // PAGE LOAD INITS
+    window.onload = function() {
+      lucide.createIcons();
+      setDefaultDates();
+      renderFleet();
+      updateCalculator();
+    };
+
+    function setDefaultDates() {
+      const today = new Date();
+      const nextDays = new Date();
+      nextDays.setDate(today.getDate() + 3);
+
+      const formatDate = (d) => d.toISOString().split('T')[0];
+      const formatDateTime = (d) => {
+        const copy = new Date(d);
+        copy.setMinutes(copy.getMinutes() - copy.getTimezoneOffset());
+        return copy.toISOString().slice(0, 16);
+      };
+
+      document.getElementById('searchPickDate').value = formatDate(today);
+      document.getElementById('searchReturnDate').value = formatDate(nextDays);
+      
+      document.getElementById('wizardPickDate').value = formatDateTime(today);
+      document.getElementById('wizardReturnDate').value = formatDateTime(nextDays);
+    }
+
+    // RENDER CATALOG FLEET
+    function setFilter(cat) {
+      activeFilter = cat;
+      document.querySelectorAll('.filter-tab').forEach(btn => {
+        btn.classList.remove('bg-brand-600', 'text-white');
+        btn.classList.add('bg-slate-800', 'text-slate-300');
+      });
+      document.getElementById(`tab-${cat}`).classList.remove('bg-slate-800', 'text-slate-300');
+      document.getElementById(`tab-${cat}`).classList.add('bg-brand-600', 'text-white');
+      renderFleet();
+    }
+
+    function renderFleet() {
+      const grid = document.getElementById('fleetGrid');
+      const searchQuery = document.getElementById('fleetSearchInput').value.toLowerCase();
+      const sortType = document.getElementById('sortSelect').value;
+
+      let filtered = fleetData.filter(v => {
+        const matchesCat = (activeFilter === 'all') ||
+                           (activeFilter === 'utilitaria' && v.subCat === 'utilitaria') ||
+                           (activeFilter === 'suv' && v.subCat === 'suv') ||
+                           (activeFilter === 'lusso' && v.subCat === 'lusso') ||
+                           (activeFilter === 'scooter' && v.subCat === 'scooter') ||
+                           (activeFilter === 'moto' && v.subCat === 'moto');
+        
+        const matchesSearch = v.name.toLowerCase().includes(searchQuery) || v.subCatName.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesSearch;
+      });
+
+      // Sorting
+      if (sortType === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      else if (sortType === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      else filtered.sort((a, b) => b.popularity - a.popularity);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12 text-slate-500">
+            <i data-lucide="info" class="w-8 h-8 mx-auto mb-2"></i>
+            <p>Nessun veicolo risponde ai criteri di ricerca.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden hover:border-slate-700 transition-all flex flex-col group">
+          <div class="relative h-48 overflow-hidden bg-slate-950">
+            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=DriveX'"/>
+            <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-brand-600/90 text-white">
+              ${item.status}
+            </span>
+            <div class="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-xl border border-slate-800 text-xs font-semibold text-slate-300">
+              ${item.subCatName}
+            </div>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-heading text-lg font-bold text-white mb-3">${item.name}</h3>
+              
+              <!-- Specs Badges -->
+              <div class="grid grid-cols-2 gap-2 mb-6">
+                ${Object.entries(item.specs).map(([k, val]) => `
+                  <div class="bg-slate-950/60 p-2 rounded-xl text-[11px] text-slate-400 flex items-center gap-2 border border-slate-800/50">
+                    <i data-lucide="check" class="w-3 h-3 text-brand-500"></i>
+                    <span class="truncate">${val}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase tracking-wider block">a partire da</span>
+                <span class="font-heading text-2xl font-extrabold text-white">€${item.price}</span>
+                <span class="text-xs text-slate-400">/giorno</span>
+              </div>
+              <button onclick="openBookingModal(${item.id})" class="bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold px-4 py-2.5 rounded-xl flex items-center gap-1.5 transition-all shadow-lg shadow-brand-600/20">
+                <i data-lucide="key" class="w-3.5 h-3.5"></i> Prenota Ora
+              </button>
+            </div>
+
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // ACTIONS
+    function applyHeroSearch() {
+      const cat = document.getElementById('searchCategory').value;
+      if (cat === 'auto') setFilter('utilitaria');
+      else if (cat === 'moto') setFilter('scooter');
+      else setFilter('all');
+      
+      scrollToFleet();
+    }
+
+    function scrollToFleet() {
+      document.getElementById('flotta').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // CALCULATOR LOGIC
+    let calcPricePerDay = 35;
+
+    function calcSetCategory(cat, basePrice) {
+      calcPricePerDay = basePrice;
+      document.querySelectorAll('.calc-cat-btn').forEach(btn => {
+        btn.classList.remove('border-brand-500', 'bg-brand-500/10', 'text-white');
+        btn.classList.add('border-slate-700', 'bg-slate-900', 'text-slate-300');
+      });
+      event.currentTarget.classList.remove('border-slate-700', 'bg-slate-900', 'text-slate-300');
+      event.currentTarget.classList.add('border-brand-500', 'bg-brand-500/10', 'text-white');
+      updateCalculator();
+    }
+
+    function updateCalculator() {
+      const days = parseInt(document.getElementById('calcDaysRange').value);
+      document.getElementById('calcDaysDisplay').innerText = `${days} Giorni`;
+
+      let dailyRate = calcPricePerDay;
+      if (days >= 7) dailyRate *= 0.8;
+      else if (days >= 3) dailyRate *= 0.9;
+
+      let total = dailyRate * days;
+
+      if (document.getElementById('calcKasko').checked) total += 15 * days;
+      if (document.getElementById('calcGps').checked) total += 5 * days;
+
+      document.getElementById('calcTotalDisplay').innerText = `€${total.toFixed(2)}`;
+    }
+
+    // BOOKING MODAL WIZARD LOGIC
+    function openBookingModal(vehicleId) {
+      selectedVehicle = fleetData.find(v => v.id === vehicleId) || fleetData[0];
+      
+      document.getElementById('modalVehicleName').innerText = selectedVehicle.name;
+      document.getElementById('modalVehiclePrice').innerText = `€${selectedVehicle.price}.00 / giorno`;
+      document.getElementById('modalVehicleBadge').innerText = selectedVehicle.subCatName;
+      document.getElementById('modalVehicleImgSrc').src = selectedVehicle.img;
+
+      // Show/Hide category-specific options
+      const seatOption = document.getElementById('extraSeatContainer');
+      const helmetOption = document.getElementById('extraHelmetContainer');
+
+      if (selectedVehicle.category === 'auto') {
+        seatOption.classList.remove('hidden');
+        helmetOption.classList.add('hidden');
+      } else {
+        seatOption.classList.add('hidden');
+        helmetOption.classList.remove('hidden');
+      }
+
+      currentStep = 1;
+      updateStepUI();
+      calculateWizardTotal();
+
+      document.getElementById('bookingModal').classList.remove('hidden');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+
+    function calculateWizardTotal() {
+      if (!selectedVehicle) return;
+
+      const pick = new Date(document.getElementById('wizardPickDate').value);
+      const ret = new Date(document.getElementById('wizardReturnDate').value);
+      
+      let days = Math.ceil((ret - pick) / (1000 * 60 * 60 * 24));
+      if (isNaN(days) || days <= 0) days = 1;
+
+      let total = selectedVehicle.price * days;
+
+      if (document.getElementById('extraKasko').checked) total += 15 * days;
+      if (document.getElementById('extraGps').checked) total += 5 * days;
+      if (document.getElementById('extraDriver').checked) total += 8 * days;
+      if (selectedVehicle.category === 'auto' && document.getElementById('extraSeat').checked) total += 7 * days;
+      if (selectedVehicle.category === 'moto' && document.getElementById('extraHelmet').checked) total += 6 * days;
+
+      document.getElementById('modalLiveTotal').innerText = `€${total.toFixed(2)}`;
+      return { total, days };
+    }
+
+    function wizardNextStep() {
+      if (currentStep === 3) {
+        const fname = document.getElementById('driverFirstName').value;
+        const lname = document.getElementById('driverLastName').value;
+        const email = document.getElementById('driverEmail').value;
+        if (!fname || !lname || !email) {
+          alert('Inserisci i dati obbligatori del conducente.');
+          return;
+        }
+
+        const calc = calculateWizardTotal();
+        document.getElementById('sumVehicle').innerText = selectedVehicle.name;
+        document.getElementById('sumDays').innerText = `${calc.days} giorni`;
+        document.getElementById('sumDriver').innerText = `${fname} ${lname}`;
+        document.getElementById('sumRefCode').innerText = `DRV-${Math.floor(100000 + Math.random() * 900000)}`;
+        document.getElementById('sumTotal').innerText = `€${calc.total.toFixed(2)}`;
+      }
+
+      if (currentStep === 4) {
+        alert('Prenotazione completata con successo! Ti abbiamo inviato una conferma via email.');
+        closeBookingModal();
+        return;
+      }
+
+      currentStep++;
+      updateStepUI();
+    }
+
+    function wizardPrevStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStepUI();
+      }
+    }
+
+    function updateStepUI() {
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`modalStep${i}`).classList.add('hidden');
+        document.getElementById(`stepDot${i}`).classList.remove('bg-brand-500');
+        document.getElementById(`stepDot${i}`).classList.add('bg-slate-800');
+      }
+
+      document.getElementById(`modalStep${currentStep}`).classList.remove('hidden');
+
+      for (let i = 1; i <= currentStep; i++) {
+        document.getElementById(`stepDot${i}`).classList.add('bg-brand-500');
+      }
+
+      const prevBtn = document.getElementById('modalPrevBtn');
+      const nextBtn = document.getElementById('modalNextBtn');
+
+      if (currentStep === 1) prevBtn.classList.add('hidden');
+      else prevBtn.classList.remove('hidden');
+
+      if (currentStep === 4) nextBtn.innerText = 'Conferma Prenotazione';
+      else nextBtn.innerText = 'Continua';
+    }
+
+    // FAQ ACCORDION
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('i');
+      
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // MOBILE DRAWER MENU
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
